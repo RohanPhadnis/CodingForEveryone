@@ -1,0 +1,107 @@
+A program in C is made by assembling characters into tokens.
+Tokens - lexical elements.
+
+Comments:
+- // single line comment
+- /* multi line comment */
+
+Compiling: gcc -o <file>.exe <file>.c
+
+Preprocessor directive
+#directive
+#include <library> - importing libraries into the program
+#define varname value - declaring standard constant macro values into programs
+
+Identifiers: variable or function names defined by programmers (a, b, main)
+
+Operators:
++ addition
+- subtraction
+* multiplication
+/ division
+& address of
+&& and
+|| or
+! not
+
+Punctuation:
+()
+{}
+;
+
+Keywords: Tokens which have special meaning in C.
+- control: break, continue, else, for, goto, if, while
+- native types: double, float, int, long, char, enum
+- method keywords: return, void
+- types: typedef, union, struct
+- storage classification: auto, register, static
+- NOT keywords: main, include, define
+
+
+Native Data Types:
+- int - integer (4 bytes)
+- float - floating point
+- double - floating point (high precision)
+- char - unicode characters
+Modifiers:
+- unsigned - eliminates negatives
+- long - increase range/precision of int or double
+- short - decrease range/precision of int or double
+sizeof(var/type) - returns the amount of bytes used to represent the variable
+
+
+String formatting
+    * %d --> integer
+    * %e --> scientific notation
+    * %f --> float
+    * %g --> chooses the shorter one: scientific notation or float
+    * %s --> string
+    * %lf --> "long float" (double)
+    * %c --> character
+    * %p --> hexadecimal
+    * %lu --> long, unsigned int
+
+Array Initialization
+int data[5];
+int data[5] = {1, 2, 3, 4, 5};
+int data[5] = {0}; // all the array elements are 0
+int data[] = {1, 2, 3};
+
+Strings
+A list of chars concatinated together.
+"ab" stores {'a', 'b', '\0'}
+\0 is a sentinel value that indicates the end of the string
+char str[] = "a b c";
+str[0] -> a
+str[4] -> c
+str[5] -> \0
+
+Pointers
+An array is stored in the base address.
+int a; // creates a variable a that stores in integer. usually 4 bytes
+a = 3; // the integer value 3 is stored in the memory location allotted to the variable.
+int data[4] = {2, 4, 6, 8}; // creates 4 separate integer addresses
+int *p = &a; // pointer for the integer variable a;
+p --> address
+*p --> dereferenced: gets the integer value stored in the pointer
+
+Call by Reference
+Variables cannot be manipulated directly from functions outside of their definition.
+Their reference must be changed.
+scanf("%d", &size);
+* dereference
+& address of
+passing parameters --> call by value
+passing pointer --> call by reference
+void swap(int i, int j) {
+    int temp = i;
+    i = j;
+    j = temp;
+}
+swap(a, b); // Doesn't work!
+void swap(int *i, int *j) {
+    int temp = *i;
+    *i = *j;
+    *j = temp;
+}
+swap(&a, &b); // works!

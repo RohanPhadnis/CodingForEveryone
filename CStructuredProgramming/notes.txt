@@ -1,0 +1,117 @@
+Native Data Types: int, float, char, double
+
+
+Enumeration:
+Creation of a user-defined types
+Makes debugging easier - code becomes safer
+C is a weakly typed language because implicit conversion is common.
+enum day {sun, mon, tues, wed, thu, fri, sat};
+enum day today = fri;
+default initialization:
+- sun == 0
+- mon == 1
+- ...
+- sat == 6
+enum is a form of int type
+
+
+Switch Statements:
+switch (<expression>) {
+    case <value1>: <statement>; break;
+    case <value2>: <statement>; break;
+    ...
+    case <valuen>: <statement>; break;
+    default: <statement>;
+}
+case statements test if the expression is equal to the constant values
+default statement executes if none of the cases are satisfied
+break keyword exits the switch statement
+flow-through behavior: without break statement, all following cases will get executed
+
+
+Type Definition Identifier
+typedef <original_datatype> <new_datatype>;
+The original_datatype can now be referenced with the <new_datatype> identifier
+
+
+Preprocessor Commands
+- sharp sign (#) indicates a preprocessor command
+#include <lib.h>
+- imports a library into program
+#define NAME value
+- macro facility: used to define constants in a large scope (typically an uppercase identifier)
+examples:
+- #define PI 3.14159   // constant definition
+- #define EQ ==     // syntactic sugar; replaces == operator with EQ; a EQ b instead of a == b
+- #define SQ(x) ((x)*(x))    // textually replaces x*x with SQ(x); parenthesis are not implied - need to be around (x)
+
+
+Library Commands
+    * stdio.h
+        - printf(): formatted print
+        - scanf("%<f>", &var): input collection from console
+            - <f> is a string formatting types
+            - var is a variable to be assigned the inputted value
+        - #define getchar() getc(stdin)
+            - gets characters from input
+            - can also specify file name in getc() to read from file
+        - #define putchar(c) putc((c), stdout)
+            - puts char in output
+            - allows for char-by-char processing (includes whitespace)
+    * stdlib.h
+        - int abs(long int x): returns absolute value of x
+        - int rand(): returns a pseudorandom number from 0 to RAND_MAX (inclusive)
+        - void srand(unsigned int seed): defines seed for psuedorandom number generator
+    * time.h
+    * assert.h
+        - assert(<boolean>): aborts the program if the specified boolean value is false
+        - #define NDEBUG  // macro facility placed BEFORE #include <assert.h> that stops all asserts from working
+        - gcc -DNDEBUG file.c: complies with NDEBUG
+    * ctype.h
+        - isalpha(c): returns 1 if the char is a capital/lower alphabet, 0 otherwise
+        - isspace(c): returns 1 if the char is whitespace, 0 otherwise
+        - isdigit(c): returns 1 if the char is a digit, 0 otherwise
+        - islower(c): returns 1 if the char is a lowercase alphabet, 0 otherwise
+        - toupper(c): returns uppercase of character
+
+
+Structures
+ADT - abstract data type (user defined data type)
+struct tag-name {
+    declarator-list;
+}
+- declarator-list: declarations of attributes (dtype identifier;)
+typedef struct {} class-name;   // do not need to use struct class-name every time
+instantiation: class-name obj-name {initial_attribute_values}
+access:
+- obj-name.attribute-name
+- struct class-name * pointer;
+- pointer = &obj-name;
+- pointer -> attribute-name = value;
+- *pointer.attribute-name
+
+
+Operator Precedence
+CATEGORY        |               OPERATOR               |   ASSOCIATIVITY
+Postfix         |  () [] -> . ++ --                    |   Left to Right
+Unary           |  + - ! ~ ++ -- (type) * & sizeof     |   Right to Left
+Multiplicative  |  * / %                               |   Left to Right
+Additive        |  + -                                 |   Left to Right
+Shift           |  << >>                               |   Left to Right
+Relational      |  < <= > >=                           |   Left to Right
+Equality        |  == !=                               |   Left to Right
+Bitwise AND     |  &                                   |   Left to Right
+Bitwise XOR     |  ^                                   |   Left to Right
+Bitwise OR      |  |                                   |   Left to Right
+Logical AND     |  &&                                  |   Left to Right
+Logical OR      |  ||                                  |   Left to Right
+Conditional     |  ?:                                  |   Right to Left
+Assignment      |   = += -= *= /= %= >>= <<= &= ^= |=  |   Right to Left
+Comma           |   ,                                  |   Left to Right
+
+
+Stack Data Structure
+LIFO Philosophy
+Canonical non-trivial data structure
+operations: push, pop, top, empty, full, reset
+attributes: stack data, top
