@@ -115,3 +115,11 @@ LIFO Philosophy
 Canonical non-trivial data structure
 operations: push, pop, top, empty, full, reset
 attributes: stack data, top
+
+
+Linked List
+Data structure in which each element contains a pointer to the next element.
+Head - first element
+Tail - last element
+Singly-linked list: has one pointer to the very next element.
+Doubly-linked list: has a pointer to the element before and the element after.
