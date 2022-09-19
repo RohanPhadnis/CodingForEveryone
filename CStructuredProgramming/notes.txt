@@ -62,6 +62,7 @@ Library Commands
         - int abs(long int x): returns absolute value of x
         - int rand(): returns a pseudorandom number from 0 to RAND_MAX (inclusive)
         - void srand(unsigned int seed): defines seed for psuedorandom number generator
+        - malloc(size): accesses the heap, creates a memory object of the specified size, and returns a pointer
     * time.h
     * assert.h
         - assert(<boolean>): aborts the program if the specified boolean value is false
@@ -123,3 +124,8 @@ Head - first element
 Tail - last element
 Singly-linked list: has one pointer to the very next element.
 Doubly-linked list: has a pointer to the element before and the element after.
+Operations:
+    - count - counts the number of elements in the list
+    - concat - concatenates two lists
+    - insert - inserts data at a specified index
+    - delete - deletes by index position
