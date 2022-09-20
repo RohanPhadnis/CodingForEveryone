@@ -129,3 +129,47 @@ Operations:
     - concat - concatenates two lists
     - insert - inserts data at a specified index
     - delete - deletes by index position
+
+
+Binary Trees
+Node - unit of data in a tree
+Root - entry node into a tree
+Branch - connection from parent node to child node
+Leaf - node at the end of tree
+Binary Tree - tree such that nodes have at most 2 branches
+Complete Binary Tree - each node, except for leaf has 2 nodes (grows at 2^n nodes per level)
+If less than node, goes left. Else, goes right.
+For sorted tree, operation complexity is log2(n)
+Traversals:
+    - In Order: left, center, right
+    - Preorder: center, left, right
+    - Postorder: left, right, center
+
+
+Advanced I/O
+So far:
+    - printf (stdout > screen)
+    - scanf (stdin < keyboard)
+code.exe > file
+    - defines stdout file output
+code.exe < file
+    - defines stdin file input
+printf(control_string, arguments)
+    - control_string: string to be printed out, with data type formatting
+    - arguments: data to be formatted into string
+Char        |   Display
+%i or %d    |   Integer
+%u          |   Unsigned Integer
+%o          |   Octal Integer
+%x          |   Hexadecimal Integer (using a-f)
+%X          |   Hexadecimal Integer (using A-F)
+%f or %F    |   Floating-point Number (6 decimal places, default)
+%e or %E    |   Floating-point Number (with exponent, e with %e, E with %E)
+%g          |   Floating-point Number (in f or e format)
+%G          |   Floating-point Number (in f or E format)
+%a or %A    |   Floating-point Number in Hexadecimal format 0xd.ddddp±d
+%c          |   Single Character
+%s          |   Null-terminated String
+%p          |   Pointer
+%n          |   No printing; stores number of characters in print in pointed int argument
+%%          |   Prints percent sign
