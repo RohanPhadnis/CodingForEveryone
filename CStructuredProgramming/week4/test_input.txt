@@ -1,0 +1,5 @@
+Hello, World!
+This is a C program.
+C is a low-level, compliled language.
+
+Good bye!

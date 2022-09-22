@@ -58,6 +58,25 @@ Library Commands
         - #define putchar(c) putc((c), stdout)
             - puts char in output
             - allows for char-by-char processing (includes whitespace)
+        - FILE
+            - file structure in <sdtio.h> to interface with files
+        - fopen(char file_name[], char mode[])
+            - opens file given name as a string
+            - mode
+                - r: read
+                - w: write
+                - a: append
+                -r+: read plus
+                - w+: write plus
+                - a+: append plus
+            - returns a FILE* pointer
+        - fscanf(FILE* file, char format[], *var)
+            - similar to scanf, except reads from a file
+            - returns 0 when can no longer read values
+        - fclose(FILE* file)
+            - closes an opened file
+        - rewind(FILE* file)
+            - rewinds the cursor to read file from the begininning
     * stdlib.h
         - int abs(long int x): returns absolute value of x
         - int rand(): returns a pseudorandom number from 0 to RAND_MAX (inclusive)
@@ -173,3 +192,14 @@ Char        |   Display
 %p          |   Pointer
 %n          |   No printing; stores number of characters in print in pointed int argument
 %%          |   Prints percent sign
+
+
+Command Line Arguments
+input file -> process -> output file
+int main(int argc, char* argv[])
+    - main method can have 2 special arguments
+        - argc = count of arguments (including executable)
+        - argv = vector of args as strings
+eg: ./double_space.c input_file output_file
+    - argc = 3
+    - argv = {"double.c", "input_file", "output_file"}
