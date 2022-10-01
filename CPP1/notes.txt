@@ -1,0 +1,12 @@
+inline keyword
+- Used in function declaration
+- Replacement of #define
+- Implicitly used for class methods
+    inline bool
+    one_less(int a, int b)
+    { return (a - b == 1) }
+- Normally defined in header files
+- Used to encapsulate code in namespace
+
+
+<random> library

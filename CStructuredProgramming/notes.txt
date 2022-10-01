@@ -203,3 +203,60 @@ int main(int argc, char* argv[])
 eg: ./double_space.c input_file output_file
     - argc = 3
     - argv = {"double.c", "input_file", "output_file"}
+
+
+C++
+Modern form of C. More abstracted. Makes programming easier.
+1. C is a subset of C++ --> all C code can be compiled by C++ compilers
+2. C++ has many improvements that make programming easier.
+3. C++ compilers are frequently bundled with C compilers. (gcc vs g++)
+
+
+Easier IO
+cout << "C++ is an improved C";
+    << is not binary shift, but "overloaded" to provide output behavior
+cin >> miles;
+    no need to specify address
+
+
+History
+- Bell Labs, 1985
+- C with classes
+- Advantages:
+    - Free
+    - Based on C
+    - efficient (C++ > smalltalk)
+- keeps evolving (C++ 11 or higher is current version)
+
+
+C++ Ease of use
+for expression allows local declarations
+    for (int i=0; i<N; i++) {...}
+declarations can occur anywhere in code
+inferred typing with auto (differs from c)
+    auto i = 3; // automatically types to double
+    auto x = 3.0;   // automatically types to int
+    - "duck typing" - "looks like a duck, quacks like a duck, is a duck"
+    - still better to declare types for primitive data
+
+
+Standard Template Library (STL)
+- adds container classes (lists, stacks, vectors)
+vector - which is a powerful, flexible, efficient generation of the array
+int a[N] --> vector<int> a(N)
+
+
+Classes
+C++ is a modern language because it allows for object-oriented programming.
+ADT = Class
+Unlike structs with restrict objects to data fields, classes allow for the creation of object methods
+Encapsulation - principle of object-oriented programming that hides internal data of a class
+class rectangle {
+    public:
+        rectangle (double h, double w);
+        double area {return height * width;}
+    private:
+        double height, width;
+};
+rectangle r(2.5, 2);
+ar = r.area();
