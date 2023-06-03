@@ -10,3 +10,175 @@ inline keyword
 
 
 <random> library
+Random Engines:
+    default_random_engine - Default random engine
+    mt19937 - Mersenne Twister 19937 generator
+    ranlux48 - Ranlux 48 generator
+    knuth_b - Knuth-B generator
+
+
+C vs C++
+- C
+    - inventor: Ritchie
+    - year: 1972
+    - size: small, 29 keywords
+    - type: System Implementation Language (SIL)
+    - supports: imperative programming
+    - subset of C++
+- C++
+    - inventor: Stroustrup
+    - year: 1985
+    - size: large, 63 keywords
+    - supports: imperative programming, "swiss army knife" also supports OOP and generic programming
+    - extension of C
+- Why C++ is better
+    - More type safety
+    - More libraries
+    - Less dependence on preprocessor
+    - OOP
+
+
+Java vs C++
+- Java
+    - pure OOP
+    - Philosophy: high-level
+        - C++ is low-level
+    - developer: Sun
+    - inspiration: smalltalk with C syntax
+    - JVM - universal semantics
+        - C++ originally compiled to C
+        - C++ no hidden overhead
+    - Ergo no Garbage Collection and default not virtual function call
+
+
+The C Program has 3 main parts:
+    1. Standard Libraries
+    2. Macros and Preprocessor Commands
+    3. main() function
+
+
+Libraries and Namespaces in C++
+    - c++ include statements dont require the .h for header files
+    - if c is the starting character of the library, it indicates that it is also a library in c (eg ctime, cstdlib)
+    - namespace is a wrapper for tools in a library
+    - namespace is an encapsulation; encapsulation is a key principle for isolating operations to a library and minimizing outside interactions
+    - using keyword indicates that that namespace is being used by the program
+    - using defines the scope of the program
+    - if using
+        - cout << "Hello World!";
+    - if not using
+        - std::cout << "Hello World!";
+    - :: is the scope resolution operator
+
+
+inline keyword
+    - incline used to declare functions
+    - the code from the body is executed in-line by the compiler, instead of creating a new stack for that function
+    - this speeds up runtime execution
+    - better than textual substitution of #define macros
+    - Rules for when to NOT use inline:
+        - If a function contains a loop. (for, while and do-while)
+        - If a function contains static variables.
+        - If a function is recursive.
+        - If a function return type is other than void, and the return statement doesn’t exist in a function body.
+        - If a function contains a switch or goto statement.
+
+
+const keyword
+    - used to declare constants
+    - syntax: const <type> <identifier> = <value>;
+    - eg: const double pi = 3.14159;
+    - replaces macro #define which is unsafe and uses textual substitution
+
+
+iostream
+    - cout used to display output; type is ostream
+        - cout << "Hello World!";
+        - endl is for newline; type is iomanipulator
+    - cin used to take input; type is istream
+        - int x;
+        - cin >> x;
+    - << and >> bitwise shift operators are overloaded
+
+
+Heap-based Memory Keywords
+    - malloc in c is replaced by new keyword in c++
+    - free in c is replaced by delete keyword in c++
+    - accessing heap memory
+
+
+Casting
+    - C casting is also supported in C++
+        - syntax: (type) value
+        - eg: (double) 1 == 1.0
+    - C++ has a more secure casting method called static_cast
+        - static_cast<type>(value)
+        - only performs the cast if the casting is supported; else throws an error
+        - static_cast<double>(1) == 1.0
+
+
+Overloading
+    - Multiple methods with the same name can exist and are differentiated by their method signatures.
+    - Method signature: types and number of parameters.
+    - C++ does signature matching based on runtime arguments
+
+
+Call by Reference
+    - C++ supports pass by reference, call by reference unlike C
+    - <datatype>& is read as reference to <datatype>. used for call by reference cases
+        - int& is read as reference to int
+
+
+Generics
+    - C++ supports generics. Generics are a way to generalize code for any input data types.
+    - template and class keywords are used to define generic
+        - template <class T>
+        - T can be used then to describe any inputs. the actual data type will be deduced during runtime.
+        - T is a meta variable which will be replaced by the arguments' actual data type
+    - multiple templates can be created for dealing with numerous generic types
+        - template <class T1, class T2>
+
+
+Optional Parameters
+    - A function can have optional parameters. Default values specified in method header.
+        - void print(char* text = "hi") {}
+        - print()
+        - print("hello")
+    - Allows for different signatures
+
+
+Const Correctness
+    - A function can define a parameter to be const. This means that the function itself does not modify this parameter.
+        - int sum(const int x, const int y)
+
+
+C++ Casting
+    - static_cast<type>(val) - safe cast
+    - reinterpret_cast<type>(val) - highly unsafe cast; equivalent to (type) val
+    - dynamic_cast<type>(val) - used with classes
+    - const_cast<type>(val) - casts away const-ness
+
+
+Graph Theory
+    - Very important topic in Computer Science
+    - Applications encompass but are not limited to:
+        - Artificial Intelligence similarity algorithms
+        - GPS algorithms
+        - Internet routing
+        - database queries
+    - Vocabulary
+        - graph - a network of nodes and edges
+        - node - an element in a graph
+        - edge - a path used to travel between nodes
+        - complete graph - a graph in which every node has a connection to every other node
+            - K notation: K4 is a complete graph with 4 nodes; K5 is a complete graph with 5 nodes...
+        - directed edge - edge with a direction
+        - undirected edge - edge in which direction of travel is not restricted
+        - degree of a node - number of edges connected into the node
+
+
+Graph Data Structure
+    - Graph is an Abstract Data Type (ADT)
+    - There are 2 implementations of graphs, each with its own tradeoffs
+        - Connectivity matrix - better for dense graphs
+        - Edge list representation - better for sparse graphs
