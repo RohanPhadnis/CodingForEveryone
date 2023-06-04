@@ -168,13 +168,15 @@ Graph Theory
         - database queries
     - Vocabulary
         - graph - a network of nodes and edges
-        - node - an element in a graph
+        - node - an element in a graph; AKA vertex
         - edge - a path used to travel between nodes
         - complete graph - a graph in which every node has a connection to every other node
             - K notation: K4 is a complete graph with 4 nodes; K5 is a complete graph with 5 nodes...
         - directed edge - edge with a direction
         - undirected edge - edge in which direction of travel is not restricted
         - degree of a node - number of edges connected into the node
+        - connected graph - there is at least one path from any node to any other node in the graph
+        - weighted edge - edge with a cost of traversal (ex. distance)
 
 
 Graph Data Structure
@@ -182,3 +184,79 @@ Graph Data Structure
     - There are 2 implementations of graphs, each with its own tradeoffs
         - Connectivity matrix - better for dense graphs
         - Edge list representation - better for sparse graphs
+    - List Representation
+        - Definition: a representation of a directed graph with n vertices using an array of n lists of vertices
+        - List i contains vertex j if there is an edge from vertex i to vertex j
+        - A weighted graph may be represented with a list of vertex / weight pairs
+        - An undirected graph may be represented by having vertex j in the list for vertex i and vertex i in the list for vertex j
+    - Example:
+        - Matrix representation
+            - row at index i represents the connections for node i
+            - columns represent nodes to connect with
+                1   2   3   4
+            1   1   1   1   1
+            2   1   0   0   0
+            3   0   1   0   1
+            4   0   1   1   0
+        - List representation
+            1: 1, 2, 3, 4
+            2: 1
+            3: 2, 4
+            4: 2, 3
+
+
+Graph Traversal
+    - Breadth First Search (BFS)
+        - visiting all immediately adjacent nodes before exploring more
+    - Depth First Search (DFS)
+        - entirely exploring a single branch before exploring new branches
+
+
+Dijkstra's Algorithm
+    - Finds the shortest path in a graph between 2 nodes.
+    - Starts at starting node and does a weighted BFS.
+    - 2 data structures: visited set and priority queue
+    - visited set starts out with starting node (dist = 0)
+    - all neighbours are added to min heap priority queue, sorted by distance.
+    - elements are removed from the priority queue, placed in the visited set, their neighbours added to priority queue
+
+
+Enums
+    - Supported by C++ and newer versions of C.
+    - Used to define a related set of constants
+        - syntax: enum colors{RED, BLUE, GREEN};
+        - RED = 0; BLUE = 1; GREEN = 2;
+
+
+Operator Overloading
+    - For using operators on non-native types.
+    - Order of precedence of operators cannot be changed.
+    - Used with unary and binary operations; ternary operators cannot be overloaded.
+    - syntax:
+        inline <return type> operator<symbol> (params) {}
+        - params corresponds to operands and can be 1 or 2, depending on operator.
+
+
+Object-Oriented Programming
+    - Vocabulary
+        - class: a blueprint for creating objects
+        - object: an instance of a class
+        - private method/attribute: restricted only to the class itself
+        - public method/attribute: visible to any script
+        - protected method/attribute: visible only to subclasses
+
+
+Classes in C++
+    - syntax:
+
+    class <class name> {
+    private:
+        // private methods/attributes
+    public:
+        // public methods/attributes
+
+        // constructor
+        <class name>(<params>) {
+        }
+    };
+
