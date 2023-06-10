@@ -4,6 +4,8 @@
 // Efficiency is not max and can be improved by using hashing for sets and min heap implementation of priority queue.
 //
 #include <iostream>
+#include <random>
+
 
 using namespace std;
 
@@ -12,11 +14,28 @@ typedef struct nodeDistPair{char val; int cost;} nodeDistPair;
 typedef struct listNode{nodeDistPair* data; listNode* next;} listNode;
 
 
-nodeDistPair* buildPair(char val, int cost) {
+inline nodeDistPair* buildPair(char val, int cost) {
     nodeDistPair* output = new nodeDistPair();
     output->val = val;
     output->cost = cost;
     return output;
+}
+
+
+inline char intToChar(int x) {
+    return static_cast<char>(x + 65);
+}
+
+
+inline int charToInt(char x) {
+    return static_cast<int>(x) - 65;
+}
+
+
+void printOutputArray(int* array, int size) {
+    for (int i = 0; i < size; i++) {
+        cout << intToChar(i) << ": " << array[i] << endl;
+    }
 }
 
 
@@ -140,8 +159,9 @@ public:
 class Graph {
 private:
     Set* array;
+    int n;
 public:
-    Graph(int n) {
+    Graph(int n): n(n) {
         array = new Set[n];
         for (int i = 0; i < n; i++) {
             array[i] = Set();
@@ -149,8 +169,8 @@ public:
     }
 
     void addPair(char val1, char val2, int dist) {
-        int index1 = static_cast<int>(val1) - 65;
-        int index2 = static_cast<int>(val2) - 65;
+        int index1 = charToInt(val1);
+        int index2 = charToInt(val2);
         nodeDistPair* data1 = buildPair(val2, dist);
         nodeDistPair* data2 = buildPair(val1, dist);
         array[index1].add(data1);
@@ -158,36 +178,62 @@ public:
     }
 
     Set getSet(char val) {
-        return array[static_cast<int>(val) - 65];
+        return array[charToInt(val)];
+    }
+
+    int getN() {
+        return n;
     }
 };
 
 
-int dijkstra(Graph graph, char start, char end) {
+int* dijkstra(Graph graph, char start) {
     Set visitedSet;
     PriorityQueue pq;
     pq.enqueue(buildPair(start, 0));
     nodeDistPair* current;
     nodeDistPair* currentChild;
     Set graphSet;
-
+    int* output = new int[graph.getN()];
+    for (int i = 0; i < graph.getN(); i++) {
+        output[i] = 10000;
+    }
     while (!pq.isEmpty()) {
         current = pq.dequeue();
-        if (current->val == end) {
-            return current->cost;
-        }
-        graphSet = graph.getSet(current->val);
-        currentChild = graphSet.getNext();
-        while (currentChild != NULL) {
-            if (!visitedSet.contains(currentChild)) {
-                pq.enqueue(buildPair(currentChild->val, currentChild->cost + current->cost));
-            }
+        if (!visitedSet.contains(current)) {
+            output[charToInt(current->val)] = current->cost;
+            graphSet = graph.getSet(current->val);
             currentChild = graphSet.getNext();
+            while (currentChild != NULL) {
+                if (!visitedSet.contains(currentChild)) {
+                    pq.enqueue(buildPair(currentChild->val, currentChild->cost + current->cost));
+                }
+                currentChild = graphSet.getNext();
+            }
+            visitedSet.add(current);
         }
-        visitedSet.add(current);
     }
+    return output;
+}
 
-    return 0;
+
+Graph generateGraph(double density, int minNodes = 2, int maxNodes = 10) {
+    srand(time(0));
+    int size = rand() % (maxNodes - minNodes) + minNodes;
+    Graph output(size);
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            double num = static_cast<double>(rand()) / RAND_MAX;
+            if (num <= density) {
+                output.addPair(
+                        intToChar(i),
+                        intToChar(j),
+                        static_cast<int>(static_cast<double>(rand()) / RAND_MAX * 100)
+                );
+            }
+        }
+    }
+    return output;
 }
 
 
@@ -196,19 +242,13 @@ int main() {
         * matrix representation of desired graph
         *      A   B   C   D   E
         * A    0   2   3   -   -
-        * B    2   0   -   3   5
+        * B    2   0   -   8   4
         * C    3   -   0   1   -
-        * D    -   3   1   0   2
-        * E    -   5   -   2   0
+        * D    -   8   1   0   2
+        * E    -   4   -   2   0
     */
-    Graph graph(5);
-    graph.addPair('A', 'B', 2);
-    graph.addPair('A', 'C', 3);
-    graph.addPair('B', 'D', 3);
-    graph.addPair('B', 'E', 5);
-    graph.addPair('C', 'D', 1);
-    graph.addPair('D', 'E', 2);
-    int dist = dijkstra(graph, 'A', 'E');
-    cout << dist << endl;
+    Graph graph = generateGraph(0.2);
+    int* dist = dijkstra(graph, 'A');
+    printOutputArray(dist, graph.getN());
     return 0;
 }

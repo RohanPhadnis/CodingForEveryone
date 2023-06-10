@@ -105,6 +105,11 @@ Heap-based Memory Keywords
     - malloc in c is replaced by new keyword in c++
     - free in c is replaced by delete keyword in c++
     - accessing heap memory
+        - ex
+            int* p = new int(9);    // initializing a new int
+            char* array = new char[5];  // initializing an array of 5 chars
+            delete p;   // deallocating memory
+            delete [] array; // deallocating memory - notice [] for arrays
 
 
 Casting
@@ -150,6 +155,18 @@ Optional Parameters
 Const Correctness
     - A function can define a parameter to be const. This means that the function itself does not modify this parameter.
         - int sum(const int x, const int y)
+    - A function can also be const in declaration, to express that it does not modify the object
+        - Example
+
+        class Point {
+        public:
+            double get_x() const {
+                return x;
+            }
+        private:
+            double x;
+            double y;
+        };
 
 
 C++ Casting
@@ -177,6 +194,14 @@ Graph Theory
         - degree of a node - number of edges connected into the node
         - connected graph - there is at least one path from any node to any other node in the graph
         - weighted edge - edge with a cost of traversal (ex. distance)
+        - density - probability an edge exists
+            - in range [0, 1]
+            - 0 means the graph is unconnected
+            - 1 means the graph is complete
+            - keeping density constant, as the size of a graph increases, the likelyhood of it being connected also increases
+        - spanning tree - a set of edges which connects all nodes on a graph, without cycles; n nodes in graph, n-1 edges in spanning tree
+        - minimum spanning tree (mst) - a spanning tree made using the least cumulative cost of edge traversal
+
 
 
 Graph Data Structure
@@ -208,6 +233,8 @@ Graph Data Structure
 Graph Traversal
     - Breadth First Search (BFS)
         - visiting all immediately adjacent nodes before exploring more
+        - open set with all reachable nodes and closed set with all explored nodes
+        - can be used to determine if a graph is connected
     - Depth First Search (DFS)
         - entirely exploring a single branch before exploring new branches
 
@@ -244,6 +271,12 @@ Object-Oriented Programming
         - private method/attribute: restricted only to the class itself
         - public method/attribute: visible to any script
         - protected method/attribute: visible only to subclasses
+        - accessor methods: methods to get private instance data
+        - mutator methods: methods to modify private instance data
+        - constructor: method to build an object; initialize objects; convert to object; allocate memory for object
+        - default constructor: constructor with no arguments
+        - copy constructor: constructor that creates a deep copy of an existing instance of that class
+        - destructor: method to deallocate object from heap memory
 
 
 Classes in C++
@@ -260,3 +293,67 @@ Classes in C++
         }
     };
 
+
+Constructor with Initializer List
+    - Initializer list allows for value assignment to attributes
+    - better than initializing in body of constructor method because accounts for const attributes
+        - if an attribute is const, cannot assign traditional way
+    - Point example:
+
+    class Point {
+    private:
+        double x;
+        double y;
+    pubic:
+        // traditional way
+        Point(double x, double y) {
+            this->x = x;
+            this->y = y;
+        }
+
+        // with initializer list
+        Point(x, y):x(x), y(y){}
+    }
+
+
+Destructor
+    - Used to deallocate heap-based memory
+    - Defined using the ~ symbol
+    - takes no params
+    - called when scope of object is erased or when the delete keyword is used
+    - Example
+
+        class <class name> {
+        public:
+
+            // constructor
+            <class name>(<params>) {}
+
+            // destructor
+            ~<class name>{}
+        };
+
+
+Null Pointers
+    - Keyword nullptr is used for null pointers. Alternatively, NULL or 0 can also be used.
+
+
+Singly Linked List
+    - A Singly Linked List is a data structure to implement the list ADT.
+    - It stores each element as node containing the data for that element and a pointer to the node with the next element.
+    - Iterations continue until the current pointer is NULL.
+
+
+Copies
+    - Shallow/Referential Copy - a copy to the same address, meaning that modifications will affect all other copies; more efficient but less useful
+    - Deep Copy - a copy in which data is copied to newer addresses, meaning that the new object is equivalent but not the exact same
+        - deep copy constructor must have a const parameter
+
+
+Prim's Algorithm
+    - Algorithm for fining MST, given a start node
+    - Greedy Algorithm Approach
+    - Has an open set and a closed set
+    - Closed set contains all currently explored nodes
+    - Open set contains reachable nodes
+    - Least costly path from open set is chosen
