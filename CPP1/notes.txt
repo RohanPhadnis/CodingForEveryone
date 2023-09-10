@@ -357,3 +357,22 @@ Prim's Algorithm
     - Closed set contains all currently explored nodes
     - Open set contains reachable nodes
     - Least costly path from open set is chosen
+
+
+Greedy Algorithm
+    - An algorithm that works by utilizing local min/max values to find a globally optimal solution.
+    - Not all greedy algorithms always work.
+        - Traveling Salesman Problem (TSP)
+            - finding shortest linear path that connects all nodes in a graph
+            - a greedy approach is to take the shortest reachable edge at each node
+            - not guaranteed to give the best solution, but a good heuristic approximation
+    - Prim and Dijkstra are greedy algorithms that ALWAYS work
+
+
+Kruskal's Algorithm
+    - Algorithm for finding an MST
+    - Forest - a set of trees
+    - Creates a forest with each node as a separate tree
+    - Takes the least costly reachable edge
+        - if the edge connects separate trees, the trees are combined into one
+        - else, the edge will form a loop and must be discarded
