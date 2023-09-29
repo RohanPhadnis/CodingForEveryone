@@ -376,3 +376,145 @@ Kruskal's Algorithm
     - Takes the least costly reachable edge
         - if the edge connects separate trees, the trees are combined into one
         - else, the edge will form a loop and must be discarded
+
+
+Operator Overloading
+    - User defined types should be indistinguishable from native types
+    - Operator overloading and conversion allows us to implement this principle
+    - C++ uses class constructors to provide behavior for a cast (between parameter types and the class itself)
+        - keyword explicit stops this behavior
+        - explicit: forces the constructor to be called
+
+
+Overloading and Function Conversion
+    - C++ uses the following strategies, in this order to match an overloaded function to the specified inputs (to decide which version of the function to use)
+        - Exact match to signature
+        - Standard promotion
+        - Standard type conversion
+        - User defined conversion
+        - math to ellipsis
+        - ambiguity error
+    - keyword explicit adds more security
+
+
+Friend Function
+    - friend functions are functions which behave like they are outside a class's scope, but get access to its private attributes
+    - error because cannot access x and y outside the Point class!
+        class Point {
+        private: double x, y;
+        }
+        ostream& operator<<(ostream& out, const point& p) {
+            out << "(" << x << ", " << y << ")";
+            return out;
+        }
+    - member function has a default first argument of type Point, so cannot solve using a member function
+    - friend functions allow access to private object and do not possess the dot argument
+        class Point {
+        private:double x, y;
+        public:
+            friend ostream& operator<<(ostream&...) {...}
+        }
+    - in operator loading, the this object is the first argument if defined within the scope of the class
+    - friend functions allow for different first arguments
+
+
+Non Overloadable Operators
+    - scope resolution
+    - ternary
+
+
+Standard Template Library (STL)
+    - STL has:
+        - Containers: vector, list, map
+            - sequential containers: vector, list
+            - associative containers: map, set
+        - Algorithms: sort, permute
+        - Iterators: forward, backward, random access
+
+
+Vector Iteration
+    - iterator p is conceptually a pointer
+    - has endpoints v.being() and v.end() to define range
+    - begin() stores a value
+    - end() does not store a value; is a sentinel
+
+
+auto Keyword
+    - auto is a keyword to automatically infer the type of what it is being assigned to
+    - auto i = 0; // equivalent to int i = 0;
+    - auto c = 'B'; // equivalent to char c = 'B';
+    - Cannot declare with auto; must assign a value during declaration
+
+
+Vector Methods
+    - v.size() - returns current size of the container
+    - v.resize(int size) - resize the vector
+    - Constructors
+        - vector<T> v; // empty sequence
+        - vector<T> v(n); // size n with default constructor T()
+        - vector<T> v(n, value); // for n elements, each element is assigned value of type T
+
+
+Ranged-based For Statement
+    - for (declaration : expression)
+    - This is the "range for statement"
+    - example for array:
+        double data[];
+        ...
+        double sum = 0;
+        for (double d : data) {
+            sum += d
+        }
+    - example for sequential container with reference declaration
+        for (auto& element : data) {
+            element += 2; // allows mutation
+        }
+
+
+Sorting
+    - sort(w.begin(), w.end())
+        - The sort() algorithm is found in the STL.
+        - Efficient form of quicksort [Hoare]
+        - requires random access
+
+
+List
+    - list is a bidirectional container with forward and backward pointers, start, and end sentinal
+
+Iterator Categories
+    - 5 iterator categories from weakest to strongest:
+        - input - read, single pass
+            - example: input file; cursor goes away after reading once
+        - output - write, single pass
+            - example: output file; allows writing once
+        - forward - read and write, multipass 1D
+            - allows reading and writing; also act on it; cursor does not disappear
+        - bidirectional, multipass, 2+ directions
+            - example: linked list; multipass is allowed, backwards direction is allowed
+        - random access, anywhere
+            - O(1) access into indexable data structures
+    - In STL, the design principle is to use the weakest iterator that accommodates the most efficient algorithm
+    - Quicksort requires random access. As a consequence, it cannot be used on a nonrandom access container such as a list
+
+
+accumulate()
+    - part of the <numeric> library
+    - accumulate(input_it, input_it, value)
+    - value is usually 0, accumulates over specified range
+    - example
+        int array[4] = {1, 2, 3, 4};
+        accumulate(data, data + 4, 5); // returns 15
+
+
+Random Numbers
+    - Naive C implementation
+        #include <cstdlib>
+        using namespace std;
+        double prob() {
+            return static_cast<double>(rand()) / RAND_MAX;
+        }
+
+
+Writing to File
+    ofstream outp("data.txt")
+    outp << "text";
