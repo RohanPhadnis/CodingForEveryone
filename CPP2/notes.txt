@@ -1,0 +1,194 @@
+Enum Class
+    - In C/C++, the simple enum is erroneous. It gives an error when two of the same identifiers are used in the same scope.
+        enum Colors{RED, GREEN, BLUE};
+        enum TrafficLight{RED, YELLOW, GREEN};
+    - C++ enum classes solve this problem using the scope resolution operator
+        enum class Colors{RED, GREEN, BLUE};
+        enum class TrafficLight{RED, YELLOW, GREEN};
+        Color::RED
+        TrafficLight::RED
+    - Syntax:
+        enum class <identifier>: <integral_type>{<enumerator_list>};
+    - <integral_type> is used to define the type of the enum components; it is optional; default is int
+
+
+Standard Template Library (STL)
+    - 3 main parts:
+        1. Containers
+            - Sequential: vectors, dequeues, lists
+            - Associative: set, map
+        2. Iterators
+            - Input
+            - Output
+            - Forward
+            - Backward
+            - Random Access
+        3. Algorithms
+            - non-mutating sequence algorithms: Find, Count
+            - mutating sequence algorithms: Copy, Random Shuffle
+            - sorting-related algorithms: Sort, Merge
+            - numeric algorithms: Accumulate, Inner Product
+    - New Additions in C++ 11
+        - <regex> - regular expression
+        - <thread> - threading
+        - <unordered_map> - hash based map
+        - <array> - fixed size array
+        - <forward_list> - singly linked list
+        - and more...
+
+
+C++ Forward Iterator
+    - Search forward direction one-by-one
+    - Operator ++ is defined ("advance the iterator")
+    - Dereferencing operators * and -> are also defined
+    - Forward iterators may be compared with == and !=
+    - Copy construction is supported
+    - used in STL replace algorithm
+            template <class T>
+            void replace(ForwardIterator first, ForwardIterator last, const T& x, const T& y);
+          OR ForwardIterator can be defined as a template:
+            template <class ForwardIterator, class T>
+
+
+Bidirectional Iterator
+    - Must allow ++ for forward direction, but also -- for backward direction
+    - canonical algorithm that uses the bidirectional iterator is STL reverse() algorithm
+            template <typename T>
+            void reverse(BidirectionalIterator first, BidirectionalIterator last);
+    - It is good practice to use the weakest iterator for the most optimal algorithm. Palindrome checks can be done in O(n) time with random access iterators. However, using a bidirectional iterator is best practice.
+    - Palindrome checks will take O(n^2) time with forward iterators.
+
+
+Random Access Iterator
+    - random access iterator must allow the elements to be randomly searched in fixed time
+    - usable for indexed arrays
+    - requires effectively being able to add or subtract an iterator value and retrieve a value from the computed position
+    - means that iterator values can be compared with >, >=, <=, and <, as well as == and =!
+    - supports pointer arithmetic
+    - a canonical algorithm using this iterator is STL sort() algorithm
+            template<class RandomAccessIterator>
+            void sort(RandomAccessIterator first, RandomAccessIterator last);
+    - STL sort implementation uses Hoare Quicksort
+    - ptrdiff_t is a result of pointer subtraction
+
+
+STL Containers
+    - sequence - ordered by sequence of elements; deque, list, vector, forward_list, array
+    - associative - keys for looking up elements; set, multiset, map, multimap, unordered_map, unordered_set
+    - Typical Container Interface
+        - constructors: default constructors, copy constructors, move constructors
+        - element access
+        - element insertion
+        - element emplacement
+        - element deletion
+        - destructor
+        - iterators
+
+
+Associative Containers
+    - Ordered Set/Map
+        - also take in a comparator to order keys
+    - Unordered Set/Map
+        - hash-based lookup
+        - O(1) lookup
+    - In maps, element.first for keys, element.second for values
+
+
+Algorithms
+    - Sorting algorithms
+    - Non-mutating sequence algorithms
+    - Mutating sequence algorithms
+    - Numerical algorithms
+    - Generally use iterators to access containers instantiated on given type
+        - resulting code can be competitive in efficiency with special purpose codes
+
+
+Sorting Algorithms: Prototypes
+    - quicksort algorithm over elements b to e
+        template<class RandAcc>
+        void sort(RandAcc b, RandAcc e);
+    - stable sorting algorithms over elements b to e (elements remain in their relative same position)
+        template<class RandAcc>
+        void stable_sort(RandAcc b, RandAcc e);
+
+
+Non-mutating Sequence Algorithms
+    - Do not modify contents of the containers they work on
+    - typical operation is searching container for particular element and returning its position
+    - find position of t in range b to e
+        template<class InputIter, class T>
+        InputIter find(InputIter b, InputIter e, const T& t);
+    - finds position of first element that makes predicate true in range b to e, otherwise position e is returned
+        template<class InputIter, class Predicate>
+        InputIter find(InputIter b, InputIter e, Predicate p);
+    - predicates are examples of functors (return True/False based on a given input)
+    - apply f to each value found in range b to e
+        template<class InputIter, class Function>
+        void for_each(InputIter b, InputIter e, Function f);
+
+
+Lambda Expressions
+    - derived from lisp
+    - allows writing of unnamed functions in place
+    - syntax: [](type param) -> <return type>{<body>}
+        [](int n) -> int {return ++n;}
+
+
+Mutating Function
+    - copying over elements from b1 to e1
+    - copy is placed starting at b2, position returned is end of copy
+        template<class InputIter, class OutputIter>
+        OutputIter copy(InputIter b1, InputIter e1, OutputIter b2);
+
+
+Numerical Algorithms
+    - Sums
+    - Inner product
+    - Adjacent difference
+    - Numerical algorithm behave as expected on numerical types where + and * are defined
+    - Prototypes
+        - Standard accumulation algorithm whose sum is initially t; successive elements from range b to e are added to sum
+                template <class InputIter, class T>
+                T accumulate(InputIter b, InputIter e, T t);
+        - Accumulation whose sum is initially t; successive elements from b to e are summed with sum = bop(sum, element)
+                template <class InputIter, class BinOp>
+                T accumulate(InputIter b, InputIter e, T t, BinOp bop);
+            - the binary operation is a functor
+
+
+Function Objects
+    - useful to have function objects to further leverage STL library
+        - numerical functions have built-in meaning using + or *, as well as user-provided binary operators which could be passed in
+    - defined function objects can be found in function.h or built
+    - function objects are classes that have operator() defined
+        - inlined, compiled producing efficient object code
+
+
+Defined Function Object Classes
+    - Arithmetic Objects
+        - adds two operands of type T
+            template<class T>
+            struct plus<T>
+        - subtracts two operands of type T
+            template<class T>
+            struct minus<T>
+        - multiplies two operands of type T
+            template<class T>
+            struct times<T>
+        - divides two operands of type T
+            template<class T>
+            struct divides<T>
+        - modulus (%) for two operands of type T
+            template<class T>
+            struct modulus<T>
+        - unitary minus of one argument of type T
+            template<class T>
+            struct negate<T>
+    - Comparison Objects
+    - Logical Objects
+
+Function Adapters
+    - Creation of function objects using adaption
+    - Negators for negating predicate objects
+    - Binders for binding a function argument
+    - Adapters for pointer to function

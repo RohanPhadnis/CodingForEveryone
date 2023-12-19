@@ -307,7 +307,6 @@ public:
     HashSet<Edge> getSet(char x) {
         cout << hashCode(x) << endl;
         HashSet<Edge> output = backingArray[hashCode(x)];
-        cout << "hey" << endl;
         return backingArray[hashCode(x)];
     }
 
@@ -447,10 +446,10 @@ Graph buildGraph(double density, int n) {
 
 int main() {
 
-    Graph g(5);// = buildGraph(0.5, 5);
-    g.addEdge('a', 'b', 3);
+    Graph g = buildGraph(0.8, 20);
+    /*g.addEdge('a', 'b', 3);
     g.addEdge('a', 'c', 5);
-    g.addEdge('b', 'c', 1);
+    g.addEdge('b', 'c', 1);*/
     HashSet<Edge> hashSet = g.getSet(Vertex('c'));
 //    Edge current = hashSet.getNext();
 //    while (!isNull(current)) {

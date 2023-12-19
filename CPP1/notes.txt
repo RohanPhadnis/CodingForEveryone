@@ -345,9 +345,9 @@ Singly Linked List
 
 
 Copies
-    - Shallow/Referential Copy - a copy to the same address, meaning that modifications will affect all other copies; more efficient but less useful
-    - Deep Copy - a copy in which data is copied to newer addresses, meaning that the new object is equivalent but not the exact same
-        - deep copy constructor must have a const parameter
+   - Shallow/Referential Copy - a copy to the same address, meaning that modifications will affect all other copies; more efficient but less useful
+   - Deep Copy - a copy in which data is copied to newer addresses, meaning that the new object is equivalent but not the exact same
+       - deep copy constructor must have a const parameter
 
 
 Prim's Algorithm
@@ -414,7 +414,7 @@ Friend Function
         public:
             friend ostream& operator<<(ostream&...) {...}
         }
-    - in operator loading, the this object is the first argument if defined within the scope of the class
+    - in operator overloading, the this object is the first argument if defined within the scope of the class
     - friend functions allow for different first arguments
 
 
